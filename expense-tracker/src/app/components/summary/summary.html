@@ -1,0 +1,26 @@
+<div class="summary-container">
+  <div class="summary-card total-card">
+    <div class="summary-label">Total Spent</div>
+    <div class="summary-value">{{ totalAmount | currency }}</div>
+    <div class="summary-subtitle">{{ expenseCount }} expense{{ expenseCount !== 1 ? 's' : '' }}</div>
+  </div>
+
+  <div class="category-breakdown" *ngIf="categoryTotals.length > 0">
+    <h3>Spending by Category</h3>
+    <div class="category-list">
+      <div class="category-item" *ngFor="let item of categoryTotals">
+        <div class="category-header">
+          <span class="category-icon">
+            <lucide-icon [img]="getCategoryIcon(item.category)" [size]="20"></lucide-icon>
+          </span>
+          <span class="category-name">{{ item.category }}</span>
+          <span class="category-amount">{{ item.amount | currency }}</span>
+        </div>
+        <div class="category-bar">
+          <div class="category-bar-fill" [style.width.%]="item.percentage"></div>
+        </div>
+        <div class="category-percentage">{{ item.percentage | number: '1.1-1' }}%</div>
+      </div>
+    </div>
+  </div>
+</div>

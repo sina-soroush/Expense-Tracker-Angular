@@ -1,0 +1,27 @@
+<div class="expense-item">
+  <div class="expense-content">
+    <div class="expense-icon">
+      <lucide-icon [img]="getCategoryIcon(expense.category)" [size]="32"></lucide-icon>
+    </div>
+    <div class="expense-details">
+      <h3 class="expense-title">{{ expense.title }}</h3>
+      <div class="expense-meta">
+        <span class="expense-category">{{ expense.category }}</span>
+        <span class="expense-date">{{ expense.date | date: 'MMM d, y' }}</span>
+      </div>
+    </div>
+    <div class="expense-amount">
+      {{ expense.amount | currency }}
+    </div>
+  </div>
+  <div class="expense-actions">
+    <button [routerLink]="['/edit', expense.id]" class="btn btn-edit" title="Edit expense">
+      <lucide-icon [img]="PencilIcon" [size]="14" style="display: inline-block; vertical-align: middle; margin-right: 4px;"></lucide-icon>
+      Edit
+    </button>
+    <button (click)="onDelete()" class="btn btn-delete" title="Delete expense">
+      <lucide-icon [img]="TrashIcon" [size]="14" style="display: inline-block; vertical-align: middle; margin-right: 4px;"></lucide-icon>
+      Delete
+    </button>
+  </div>
+</div>

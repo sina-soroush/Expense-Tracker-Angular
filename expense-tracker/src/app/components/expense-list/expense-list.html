@@ -1,0 +1,64 @@
+<div class="expense-list-container">
+  <div class="header">
+    <h1><lucide-icon [img]="WalletIcon" [size]="32" style="display: inline-block; vertical-align: middle; margin-right: 8px;"></lucide-icon> Expense Tracker</h1>
+    <button routerLink="/add" class="btn btn-primary">
+      <lucide-icon [img]="PlusIcon" [size]="16" style="display: inline-block; vertical-align: middle; margin-right: 4px;"></lucide-icon>
+      Add New Expense
+    </button>
+  </div>
+
+  <!-- Summary Component -->
+  <app-summary [expenses]="filteredExpenses"></app-summary>
+
+  <!-- Filters -->
+  <div class="filters">
+    <div class="filter-group">
+      <label for="category-filter">Filter by Category:</label>
+      <select 
+        id="category-filter" 
+        [(ngModel)]="selectedCategory" 
+        (ngModelChange)="onCategoryChange()"
+        class="filter-select">
+        <option value="all">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="month-filter">Filter by Month:</label>
+      <input 
+        type="month" 
+        id="month-filter" 
+        [(ngModel)]="selectedMonth" 
+        (ngModelChange)="onMonthChange()"
+        class="filter-input">
+    </div>
+
+    <button 
+      *ngIf="selectedCategory !== 'all' || selectedMonth" 
+      (click)="clearFilters()" 
+      class="btn btn-secondary">
+      Clear Filters
+    </button>
+  </div>
+
+  <!-- Expense List -->
+  <div class="expenses-container">
+    <div *ngIf="filteredExpenses.length === 0" class="empty-state">
+      <p class="empty-message">📝 No expenses found</p>
+      <p class="empty-hint">
+        {{ expenses.length === 0 ? 'Start by adding your first expense!' : 'Try adjusting your filters' }}
+      </p>
+    </div>
+
+    <div *ngIf="filteredExpenses.length > 0" class="expense-list">
+      <app-expense-item 
+        *ngFor="let expense of filteredExpenses; trackBy: trackByExpenseId"
+        [expense]="expense"
+        (delete)="onDeleteExpense($event)">
+      </app-expense-item>
+    </div>
+  </div>
+</div>
