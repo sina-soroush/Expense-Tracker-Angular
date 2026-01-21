@@ -99,8 +99,8 @@
 }
 
 .category-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 12px;
 }
@@ -120,15 +120,13 @@
 }
 
 .category-circle-card:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(253, 180, 75, 0.3);
-  transform: translateY(-4px);
+  transform: scale(1.05);
 }
 
 .circle-container {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 110px;
+  height: 110px;
   flex-shrink: 0;
 }
 
@@ -238,6 +236,7 @@
   }
 
   .category-grid {
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
 
@@ -270,6 +269,7 @@
   }
 
   .category-grid {
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
   }
 

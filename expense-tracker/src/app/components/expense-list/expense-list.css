@@ -95,6 +95,12 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
+.search-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
 .search-bar input {
   flex: 1;
   border: none;
@@ -213,6 +219,7 @@
   color: #333;
   font-weight: 500;
   position: relative;
+  cursor: pointer;
 }
 
 .filter-input::-webkit-calendar-picker-indicator {
@@ -297,6 +304,13 @@
     background: rgba(255, 255, 255, 0.9);
   }
 
+  .search-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
   .search-bar input {
     width: 100%;
     padding: 8px 0;
@@ -321,6 +335,11 @@
   .filter-input {
     padding: 14px 18px;
     font-size: 16px;
+  }
+
+  .filter-input::-webkit-calendar-picker-indicator {
+    width: 24px;
+    height: 24px;
   }
 
   .expense-grid {
@@ -364,5 +383,10 @@
 
   .filters {
     padding: 12px;
+  }
+
+  .filter-input::-webkit-calendar-picker-indicator {
+    width: 24px;
+    height: 24px;
   }
 }

@@ -102,4 +102,15 @@ export class ExpenseFormComponent implements OnInit {
     const field = this.expenseForm.get(fieldName);
     return !!(field && field.invalid && (field.touched || this.submitted));
   }
+
+  incrementAmount(): void {
+    const currentAmount = this.expenseForm.get('amount')?.value || 0;
+    this.expenseForm.patchValue({ amount: Number(currentAmount) + 1 });
+  }
+
+  decrementAmount(): void {
+    const currentAmount = this.expenseForm.get('amount')?.value || 0;
+    const newAmount = Math.max(0, Number(currentAmount) - 1);
+    this.expenseForm.patchValue({ amount: newAmount });
+  }
 }

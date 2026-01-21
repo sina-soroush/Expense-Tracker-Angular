@@ -24,7 +24,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
   filteredExpenses: Expense[] = [];
   categories = EXPENSE_CATEGORIES;
   selectedCategory: string = 'all';
-  selectedMonth: string = '';
+  selectedDate: string = '';
   searchQuery: string = '';
   
   private subscription?: Subscription;
@@ -61,11 +61,11 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
       );
     }
 
-    if (this.selectedMonth) {
+    if (this.selectedDate) {
       filtered = filtered.filter(expense => {
         const expenseDate = new Date(expense.date);
-        const expenseYearMonth = `${expenseDate.getFullYear()}-${String(expenseDate.getMonth() + 1).padStart(2, '0')}`;
-        return expenseYearMonth === this.selectedMonth;
+        const selectedDate = new Date(this.selectedDate);
+        return expenseDate.toDateString() === selectedDate.toDateString();
       });
     }
 
@@ -76,13 +76,13 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     this.applyFilters();
   }
 
-  onMonthChange(): void {
+  onDateChange(): void {
     this.applyFilters();
   }
 
   clearFilters(): void {
     this.selectedCategory = 'all';
-    this.selectedMonth = '';
+    this.selectedDate = '';
     this.applyFilters();
   }
 

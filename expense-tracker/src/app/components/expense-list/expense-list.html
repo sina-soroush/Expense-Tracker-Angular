@@ -11,8 +11,10 @@
       <div class="welcome-section">
         <h1>What are you tracking today?</h1>
         <div class="search-bar">
-          <lucide-icon [img]="SearchIcon" [size]="20" style="display: inline-block; vertical-align: middle; margin-right: 8px;"></lucide-icon>
-          <input type="text" placeholder="Search expenses..." [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()">
+          <div class="search-input-wrapper">
+            <lucide-icon [img]="SearchIcon" [size]="20" style="display: inline-block; vertical-align: middle; margin-right: 8px;"></lucide-icon>
+            <input type="text" placeholder="Search expenses..." [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()">
+          </div>
           <button routerLink="/add" class="btn btn-primary add-btn">
             <lucide-icon [img]="PlusIcon" [size]="16"></lucide-icon>
             Add New
@@ -39,18 +41,20 @@
         </div>
 
         <div class="filter-group">
-          <label>Month</label>
+          <label>Date</label>
           <input 
-            type="month" 
-            id="month-filter" 
-            [(ngModel)]="selectedMonth" 
-            (ngModelChange)="onMonthChange()"
-            class="filter-input">
+            type="date" 
+            id="date-filter" 
+            [(ngModel)]="selectedDate" 
+            (change)="onDateChange()"
+            [value]="selectedDate"
+            class="filter-input"
+            placeholder="Select date">
         </div>
       </div>
 
       <button 
-        *ngIf="selectedCategory !== 'all' || selectedMonth" 
+        *ngIf="selectedCategory !== 'all' || selectedDate" 
         (click)="clearFilters()" 
         class="btn btn-secondary clear-btn">
         Clear Filters

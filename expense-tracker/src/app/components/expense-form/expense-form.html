@@ -8,73 +8,83 @@
 
   <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" class="expense-form">
     
-    <!-- Title Field -->
-    <div class="form-group">
-      <label for="title">Title / Description *</label>
-      <input 
-        type="text" 
-        id="title" 
-        formControlName="title"
-        placeholder="e.g., Grocery Shopping"
-        [class.error]="isFieldInvalid('title')">
-      
-      <div class="error-message" *ngIf="hasError('title', 'required')">
-        Title is required
+    <!-- Title and Amount Fields in one row (60/40) -->
+    <div class="form-row title-amount-row">
+      <div class="form-group form-group-60">
+        <label for="title">Title / Description *</label>
+        <input 
+          type="text" 
+          id="title" 
+          formControlName="title"
+          placeholder="e.g., Grocery Shopping"
+          [class.error]="isFieldInvalid('title')">
+        
+        <div class="error-message" *ngIf="hasError('title', 'required')">
+          Title is required
+        </div>
+        <div class="error-message" *ngIf="hasError('title', 'minlength')">
+          Title must be at least 3 characters long
+        </div>
       </div>
-      <div class="error-message" *ngIf="hasError('title', 'minlength')">
-        Title must be at least 3 characters long
+
+      <div class="form-group form-group-40">
+        <label for="amount">Amount/Price *</label>
+        <div class="amount-input-wrapper">
+          <button type="button" class="amount-btn minus-btn" (click)="decrementAmount()">
+            <span>−</span>
+          </button>
+          <input 
+            type="number" 
+            id="amount" 
+            formControlName="amount"
+            placeholder="0.00"
+            step="0.01"
+            min="0"
+            [class.error]="isFieldInvalid('amount')">
+          <button type="button" class="amount-btn plus-btn" (click)="incrementAmount()">
+            <span>+</span>
+          </button>
+        </div>
+        
+        <div class="error-message" *ngIf="hasError('amount', 'required')">
+          Amount is required
+        </div>
+        <div class="error-message" *ngIf="hasError('amount', 'min')">
+          Amount must be greater than 0
+        </div>
       </div>
     </div>
 
-    <!-- Amount Field -->
-    <div class="form-group">
-      <label for="amount">Amount *</label>
-      <input 
-        type="number" 
-        id="amount" 
-        formControlName="amount"
-        placeholder="0.00"
-        step="0.01"
-        min="0"
-        [class.error]="isFieldInvalid('amount')">
-      
-      <div class="error-message" *ngIf="hasError('amount', 'required')">
-        Amount is required
+    <!-- Category and Date Fields in one row -->
+    <div class="form-row">
+      <div class="form-group form-group-half">
+        <label for="category">Category *</label>
+        <select 
+          id="category" 
+          formControlName="category"
+          [class.error]="isFieldInvalid('category')">
+          <option value="">Select a category</option>
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+        
+        <div class="error-message" *ngIf="hasError('category', 'required')">
+          Category is required
+        </div>
       </div>
-      <div class="error-message" *ngIf="hasError('amount', 'min')">
-        Amount must be greater than 0
-      </div>
-    </div>
 
-    <!-- Category Field -->
-    <div class="form-group">
-      <label for="category">Category *</label>
-      <select 
-        id="category" 
-        formControlName="category"
-        [class.error]="isFieldInvalid('category')">
-        <option value="">Select a category</option>
-        <option *ngFor="let category of categories" [value]="category">
-          {{ category }}
-        </option>
-      </select>
-      
-      <div class="error-message" *ngIf="hasError('category', 'required')">
-        Category is required
-      </div>
-    </div>
-
-    <!-- Date Field -->
-    <div class="form-group">
-      <label for="date">Date *</label>
-      <input 
-        type="date" 
-        id="date" 
-        formControlName="date"
-        [class.error]="isFieldInvalid('date')">
-      
-      <div class="error-message" *ngIf="hasError('date', 'required')">
-        Date is required
+      <div class="form-group form-group-half">
+        <label for="date">Date *</label>
+        <input 
+          type="date" 
+          id="date" 
+          formControlName="date"
+          [class.error]="isFieldInvalid('date')">
+        
+        <div class="error-message" *ngIf="hasError('date', 'required')">
+          Date is required
+        </div>
       </div>
     </div>
 
