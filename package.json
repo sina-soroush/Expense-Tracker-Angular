@@ -6,6 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "build:vercel": "ng build --configuration=production",
+    "build:gh-pages": "ng build --configuration production --base-href /Expense-Tracker-Angular/",
+    "deploy:gh-pages": "npx angular-cli-ghpages --dir=dist/expense-tracker/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:expense-tracker": "node dist/expense-tracker/server/server.mjs"
@@ -46,6 +48,7 @@
     "@angular/compiler-cli": "^21.1.0",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
+    "angular-cli-ghpages": "^3.0.2",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
