@@ -222,6 +222,33 @@ input#title::placeholder {
   align-items: center;
 }
 
+/* Hide placeholder when value is selected - multiple approaches */
+::ng-deep .form-group ng-select.ng-has-value .ng-placeholder {
+  display: none !important;
+}
+
+::ng-deep .form-group ng-select .ng-value ~ .ng-placeholder {
+  display: none !important;
+}
+
+::ng-deep .form-group ng-select .ng-value-container:has(.ng-value) .ng-placeholder {
+  display: none !important;
+}
+
+/* Ensure selected value is visible */
+::ng-deep .form-group ng-select .ng-value {
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-weight: 500;
+}
+
+::ng-deep .form-group ng-select .ng-value-container {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
 /* Hide category icon when in placeholder state */
 ::ng-deep .form-group ng-select .ng-value-container .ng-placeholder .category-icon,
 ::ng-deep .form-group ng-select.ng-select-opened .ng-placeholder .category-icon,

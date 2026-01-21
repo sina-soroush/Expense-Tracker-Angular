@@ -70,8 +70,8 @@
           [searchable]="false"
           [class.error]="isFieldInvalid('category')">
           <ng-template ng-label-tmp let-item="item">
-            <span class="category-label" *ngIf="item && item.icon">
-              <span class="category-icon">
+            <span class="category-label" *ngIf="item">
+              <span class="category-icon" *ngIf="item.icon">
                 <lucide-icon [img]="item.icon" [size]="18"></lucide-icon>
               </span>
               <span>{{item.label}}</span>

@@ -1,11 +1,11 @@
 <div class="expense-list-container">
   <!-- Left Side: Summary/Expenses Section -->
   <div class="left-section">
-    <app-summary [expenses]="filteredExpenses"></app-summary>
+    <app-summary [expenses]="expenses"></app-summary>
   </div>
 
-  <!-- Right Side: Header + Filters + Expense Cards -->
-  <div class="right-section">
+  <!-- Center: Header + Filters -->
+  <div class="center-section">
     <!-- Header Section -->
     <div class="header">
       <div class="welcome-section">
@@ -15,31 +15,19 @@
             <lucide-icon [img]="SearchIcon" [size]="20" style="display: inline-block; vertical-align: middle; margin-right: 8px;"></lucide-icon>
             <input type="text" placeholder="Search expenses..." [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()">
           </div>
-          <button routerLink="/add" class="btn btn-primary add-btn">
-            <lucide-icon [img]="PlusIcon" [size]="16"></lucide-icon>
-            Add New
-          </button>
         </div>
       </div>
     </div>
 
+    <!-- Add Button -->
+    <button routerLink="/add" class="btn btn-primary add-btn-bottom">
+      <lucide-icon [img]="PlusIcon" [size]="16"></lucide-icon>
+      Add New
+    </button>
+
     <!-- Filters -->
     <div class="filters">
       <div class="filters-row">
-        <div class="filter-group">
-          <label>Category</label>
-          <select 
-            id="category-filter" 
-            [(ngModel)]="selectedCategory" 
-            (ngModelChange)="onCategoryChange()"
-            class="filter-select">
-            <option value="all">All Categories</option>
-            <option *ngFor="let category of categories" [value]="category">
-              {{ category }}
-            </option>
-          </select>
-        </div>
-
         <div class="filter-group">
           <label>Date</label>
           <input 
@@ -50,6 +38,37 @@
             class="filter-input"
             placeholder="Select date">
         </div>
+
+        <div class="filter-group">
+          <label>Category</label>
+          <ng-select
+            id="category-filter"
+            [items]="categoryOptions"
+            bindLabel="label"
+            bindValue="value"
+            [(ngModel)]="selectedCategory"
+            (ngModelChange)="onCategoryChange()"
+            placeholder="All Categories"
+            [clearable]="false"
+            [searchable]="false">
+            <ng-template ng-label-tmp let-item="item">
+              <span class="category-label" *ngIf="item">
+                <span class="category-icon" *ngIf="item.icon">
+                  <lucide-icon [img]="item.icon" [size]="16"></lucide-icon>
+                </span>
+                <span class="category-text">{{ item.label }}</span>
+              </span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <div class="category-option">
+                <span class="category-icon" *ngIf="item.icon">
+                  <lucide-icon [img]="item.icon" [size]="16"></lucide-icon>
+                </span>
+                <span class="category-text">{{ item.label }}</span>
+              </div>
+            </ng-template>
+          </ng-select>
+        </div>
       </div>
 
       <button 
@@ -59,8 +78,10 @@
         Clear Filters
       </button>
     </div>
+  </div>
 
-    <!-- Expense Cards Grid -->
+  <!-- Right Side: Expense Cards -->
+  <div class="right-section">
     <div class="expenses-container">
       <div *ngIf="filteredExpenses.length === 0" class="empty-state">
         <p class="empty-message">No expenses found</p>

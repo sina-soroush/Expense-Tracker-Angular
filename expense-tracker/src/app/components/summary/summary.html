@@ -5,13 +5,11 @@
   </div>
 
   <div class="total-section">
-    <div class="total-label">Total Expenses</div>
     <div class="total-amount">{{ totalAmount | currency }}</div>
     <div class="total-count">{{ expenseCount }} transaction{{ expenseCount !== 1 ? 's' : '' }}</div>
   </div>
 
   <div class="category-section" *ngIf="categoryTotals.length > 0">
-    <h3>Spending Categories</h3>
     <div class="category-grid">
       <div class="category-circle-card" *ngFor="let item of categoryTotals">
         <div class="circle-container">

@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { LucideAngularModule, Wallet, Plus, Search } from 'lucide-angular';
+import { LucideAngularModule, Wallet, Plus, Search, Utensils, Home, Car, Film, Lightbulb, Activity, ShoppingBag, BookOpen, Package } from 'lucide-angular';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { Subscription } from 'rxjs';
 import { ExpenseService } from '../../services/expense.service';
-import { Expense, EXPENSE_CATEGORIES } from '../../models/expense.model';
+import { Expense, EXPENSE_CATEGORIES, CategoryOption } from '../../models/expense.model';
 import { ExpenseItemComponent } from '../expense-item/expense-item';
 import { SummaryComponent } from '../summary/summary';
 import flatpickr from 'flatpickr';
@@ -13,7 +14,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 @Component({
   selector: 'app-expense-list',
-  imports: [CommonModule, RouterModule, FormsModule, ExpenseItemComponent, SummaryComponent, LucideAngularModule],
+  imports: [CommonModule, RouterModule, FormsModule, ExpenseItemComponent, SummaryComponent, LucideAngularModule, NgSelectModule],
   templateUrl: './expense-list.html',
   styleUrl: './expense-list.css',
 })
@@ -31,10 +32,26 @@ export class ExpenseListComponent implements OnInit, OnDestroy, AfterViewInit {
   selectedDate: string = '';
   searchQuery: string = '';
   
+  categoryOptions: CategoryOption[] = [
+    { value: 'all', label: 'All Categories', icon: null, color: '' },
+    { value: 'Food', label: 'Food', icon: Utensils, color: '#FF6B6B' },
+    { value: 'Housing', label: 'Housing', icon: Home, color: '#4ECDC4' },
+    { value: 'Transportation', label: 'Transportation', icon: Car, color: '#95E1D3' },
+    { value: 'Entertainment', label: 'Entertainment', icon: Film, color: '#F38181' },
+    { value: 'Utilities', label: 'Utilities', icon: Lightbulb, color: '#FDB44B' },
+    { value: 'Healthcare', label: 'Healthcare', icon: Activity, color: '#6C5CE7' },
+    { value: 'Shopping', label: 'Shopping', icon: ShoppingBag, color: '#A29BFE' },
+    { value: 'Education', label: 'Education', icon: BookOpen, color: '#00B894' },
+    { value: 'Other', label: 'Other', icon: Package, color: '#636E72' },
+  ];
+  
   private subscription?: Subscription;
   private flatpickrInstance: any = null;
 
-  constructor(private expenseService: ExpenseService) {}
+  constructor(
+    private expenseService: ExpenseService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.expenseService.getExpenses().subscribe(expenses => {
@@ -45,13 +62,13 @@ export class ExpenseListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
-    if (this.flatpickrInstance) {
+    if (this.flatpickrInstance && typeof this.flatpickrInstance.destroy === 'function') {
       this.flatpickrInstance.destroy();
     }
   }
 
   ngAfterViewInit(): void {
-    if (this.dateFilter?.nativeElement) {
+    if (isPlatformBrowser(this.platformId) && this.dateFilter?.nativeElement) {
       this.flatpickrInstance = flatpickr(this.dateFilter.nativeElement, {
         dateFormat: 'Y-m-d',
         onChange: (selectedDates, dateStr) => {

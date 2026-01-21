@@ -41,10 +41,17 @@
 .sidebar-header {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header lucide-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar-header h2 {
