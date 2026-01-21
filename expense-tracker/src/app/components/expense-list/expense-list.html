@@ -1,64 +1,78 @@
 <div class="expense-list-container">
-  <div class="header">
-    <h1><lucide-icon [img]="WalletIcon" [size]="32" style="display: inline-block; vertical-align: middle; margin-right: 8px;"></lucide-icon> Expense Tracker</h1>
-    <button routerLink="/add" class="btn btn-primary">
-      <lucide-icon [img]="PlusIcon" [size]="16" style="display: inline-block; vertical-align: middle; margin-right: 4px;"></lucide-icon>
-      Add New Expense
-    </button>
+  <!-- Left Side: Summary/Expenses Section -->
+  <div class="left-section">
+    <app-summary [expenses]="filteredExpenses"></app-summary>
   </div>
 
-  <!-- Summary Component -->
-  <app-summary [expenses]="filteredExpenses"></app-summary>
-
-  <!-- Filters -->
-  <div class="filters">
-    <div class="filter-group">
-      <label for="category-filter">Filter by Category:</label>
-      <select 
-        id="category-filter" 
-        [(ngModel)]="selectedCategory" 
-        (ngModelChange)="onCategoryChange()"
-        class="filter-select">
-        <option value="all">All Categories</option>
-        <option *ngFor="let category of categories" [value]="category">
-          {{ category }}
-        </option>
-      </select>
+  <!-- Right Side: Header + Filters + Expense Cards -->
+  <div class="right-section">
+    <!-- Header Section -->
+    <div class="header">
+      <div class="welcome-section">
+        <h1>What are you tracking today?</h1>
+        <div class="search-bar">
+          <lucide-icon [img]="SearchIcon" [size]="20" style="display: inline-block; vertical-align: middle; margin-right: 8px;"></lucide-icon>
+          <input type="text" placeholder="Search expenses..." [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()">
+          <button routerLink="/add" class="btn btn-primary add-btn">
+            <lucide-icon [img]="PlusIcon" [size]="16"></lucide-icon>
+            Add New
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="filter-group">
-      <label for="month-filter">Filter by Month:</label>
-      <input 
-        type="month" 
-        id="month-filter" 
-        [(ngModel)]="selectedMonth" 
-        (ngModelChange)="onMonthChange()"
-        class="filter-input">
+    <!-- Filters -->
+    <div class="filters">
+      <div class="filters-row">
+        <div class="filter-group">
+          <label>Category</label>
+          <select 
+            id="category-filter" 
+            [(ngModel)]="selectedCategory" 
+            (ngModelChange)="onCategoryChange()"
+            class="filter-select">
+            <option value="all">All Categories</option>
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Month</label>
+          <input 
+            type="month" 
+            id="month-filter" 
+            [(ngModel)]="selectedMonth" 
+            (ngModelChange)="onMonthChange()"
+            class="filter-input">
+        </div>
+      </div>
+
+      <button 
+        *ngIf="selectedCategory !== 'all' || selectedMonth" 
+        (click)="clearFilters()" 
+        class="btn btn-secondary clear-btn">
+        Clear Filters
+      </button>
     </div>
 
-    <button 
-      *ngIf="selectedCategory !== 'all' || selectedMonth" 
-      (click)="clearFilters()" 
-      class="btn btn-secondary">
-      Clear Filters
-    </button>
-  </div>
+    <!-- Expense Cards Grid -->
+    <div class="expenses-container">
+      <div *ngIf="filteredExpenses.length === 0" class="empty-state">
+        <p class="empty-message">No expenses found</p>
+        <p class="empty-hint">
+          {{ expenses.length === 0 ? 'Start by adding your first expense!' : 'Try adjusting your filters' }}
+        </p>
+      </div>
 
-  <!-- Expense List -->
-  <div class="expenses-container">
-    <div *ngIf="filteredExpenses.length === 0" class="empty-state">
-      <p class="empty-message">📝 No expenses found</p>
-      <p class="empty-hint">
-        {{ expenses.length === 0 ? 'Start by adding your first expense!' : 'Try adjusting your filters' }}
-      </p>
-    </div>
-
-    <div *ngIf="filteredExpenses.length > 0" class="expense-list">
-      <app-expense-item 
-        *ngFor="let expense of filteredExpenses; trackBy: trackByExpenseId"
-        [expense]="expense"
-        (delete)="onDeleteExpense($event)">
-      </app-expense-item>
+      <div *ngIf="filteredExpenses.length > 0" class="expense-grid">
+        <app-expense-item 
+          *ngFor="let expense of filteredExpenses; trackBy: trackByExpenseId"
+          [expense]="expense"
+          (delete)="onDeleteExpense($event)">
+        </app-expense-item>
+      </div>
     </div>
   </div>
 </div>

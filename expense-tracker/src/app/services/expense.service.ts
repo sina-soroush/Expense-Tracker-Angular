@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Expense } from '../models/expense.model';
 
@@ -7,10 +8,15 @@ import { Expense } from '../models/expense.model';
 })
 export class ExpenseService {
   private readonly STORAGE_KEY = 'expense-tracker-expenses';
-  private expensesSubject = new BehaviorSubject<Expense[]>(this.loadFromStorage());
-  public expenses$: Observable<Expense[]> = this.expensesSubject.asObservable();
+  private isBrowser: boolean;
+  private expensesSubject!: BehaviorSubject<Expense[]>;
+  public expenses$!: Observable<Expense[]>;
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+    this.expensesSubject = new BehaviorSubject<Expense[]>(this.loadFromStorage());
+    this.expenses$ = this.expensesSubject.asObservable();
+    
     if (this.expensesSubject.value.length === 0) {
       this.initializeMockData();
     }
@@ -112,6 +118,10 @@ export class ExpenseService {
   }
 
   private loadFromStorage(): Expense[] {
+    if (!this.isBrowser) {
+      return [];
+    }
+    
     try {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       if (stored) {
@@ -128,6 +138,10 @@ export class ExpenseService {
   }
 
   private saveToStorage(expenses: Expense[]): void {
+    if (!this.isBrowser) {
+      return;
+    }
+    
     try {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(expenses));
     } catch (error) {

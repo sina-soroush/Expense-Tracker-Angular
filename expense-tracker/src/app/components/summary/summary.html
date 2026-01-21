@@ -1,25 +1,38 @@
-<div class="summary-container">
-  <div class="summary-card total-card">
-    <div class="summary-label">Total Spent</div>
-    <div class="summary-value">{{ totalAmount | currency }}</div>
-    <div class="summary-subtitle">{{ expenseCount }} expense{{ expenseCount !== 1 ? 's' : '' }}</div>
+<div class="summary-sidebar">
+  <div class="sidebar-header">
+    <lucide-icon [img]="WalletIcon" [size]="24" style="color: #FDB44B;"></lucide-icon>
+    <h2>Expenses</h2>
   </div>
 
-  <div class="category-breakdown" *ngIf="categoryTotals.length > 0">
-    <h3>Spending by Category</h3>
-    <div class="category-list">
-      <div class="category-item" *ngFor="let item of categoryTotals">
-        <div class="category-header">
-          <span class="category-icon">
-            <lucide-icon [img]="getCategoryIcon(item.category)" [size]="20"></lucide-icon>
-          </span>
-          <span class="category-name">{{ item.category }}</span>
-          <span class="category-amount">{{ item.amount | currency }}</span>
+  <div class="total-section">
+    <div class="total-label">Total Expenses</div>
+    <div class="total-amount">{{ totalAmount | currency }}</div>
+    <div class="total-count">{{ expenseCount }} transaction{{ expenseCount !== 1 ? 's' : '' }}</div>
+  </div>
+
+  <div class="category-section" *ngIf="categoryTotals.length > 0">
+    <h3>Spending Categories</h3>
+    <div class="category-grid">
+      <div class="category-circle-card" *ngFor="let item of categoryTotals">
+        <div class="circle-container">
+          <svg class="circle-progress" viewBox="0 0 120 120">
+            <circle class="circle-bg" cx="60" cy="60" r="52"></circle>
+            <circle 
+              class="circle-progress-bar" 
+              cx="60" 
+              cy="60" 
+              r="52"
+              [style.stroke-dashoffset]="327 - (327 * item.percentage / 100)"></circle>
+          </svg>
+          <div class="circle-content">
+            <lucide-icon [img]="getCategoryIcon(item.category)" [size]="28"></lucide-icon>
+            <span class="circle-percentage">{{ item.percentage | number: '1.0-0' }}%</span>
+          </div>
         </div>
-        <div class="category-bar">
-          <div class="category-bar-fill" [style.width.%]="item.percentage"></div>
+        <div class="category-details">
+          <div class="category-name">{{ item.category }}</div>
+          <div class="category-amount">{{ item.amount | currency }}</div>
         </div>
-        <div class="category-percentage">{{ item.percentage | number: '1.1-1' }}%</div>
       </div>
     </div>
   </div>

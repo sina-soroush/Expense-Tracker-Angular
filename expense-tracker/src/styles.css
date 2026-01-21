@@ -5,14 +5,16 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
   color: #333;
   line-height: 1.6;
   overflow-x: hidden;
-  background: #1a1a2e;
+  position: relative;
+  background: #ff810a;
 }
 
+/* Animated Shader-like Gradient Background */
 body::before {
   content: '';
   position: fixed;
@@ -20,34 +22,101 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(128, 155, 214, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(145, 10, 255, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 40% 10%, rgba(175, 56, 255, 0.2) 0%, transparent 50%),
-    linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   z-index: -1;
-  animation: gradientShift 15s ease infinite;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(115, 191, 196, 0.8) 0%, transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(255, 129, 10, 0.9) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(141, 160, 206, 0.7) 0%, transparent 45%),
+    radial-gradient(circle at 60% 20%, rgba(253, 180, 75, 0.6) 0%, transparent 40%),
+    linear-gradient(135deg, #73bfc4 0%, #ff810a 50%, #8da0ce 100%);
+  animation: gradientShift 20s ease-in-out infinite;
+  opacity: 0.95;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    radial-gradient(ellipse at 30% 50%, rgba(255, 129, 10, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(141, 160, 206, 0.5) 0%, transparent 55%);
+  animation: gradientShiftAlt 15s ease-in-out infinite reverse;
+  mix-blend-mode: overlay;
 }
 
 @keyframes gradientShift {
   0%, 100% {
-    opacity: 1;
-    filter: hue-rotate(0deg) brightness(1);
+    transform: scale(1) rotate(0deg);
+    filter: blur(40px) brightness(1) hue-rotate(0deg);
+  }
+  25% {
+    transform: scale(1.05) rotate(5deg);
+    filter: blur(50px) brightness(1.1) hue-rotate(10deg);
   }
   50% {
-    opacity: 0.9;
-    filter: hue-rotate(20deg) brightness(1.1);
+    transform: scale(1.1) rotate(-5deg);
+    filter: blur(45px) brightness(0.9) hue-rotate(-5deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(3deg);
+    filter: blur(55px) brightness(1.05) hue-rotate(8deg);
   }
 }
 
+@keyframes gradientShiftAlt {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translate(20px, -30px) scale(1.1);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+/* Global Scrollbar Styling */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FDB44B 0%, #FCAF3B 100%);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FCAF3B 0%, #F4A229 100%);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #FDB44B rgba(255, 255, 255, 0.2);
+}
+
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .btn {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
   border-radius: 12px;
   font-size: 14px;
@@ -76,46 +145,46 @@ body::before {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(90deg, #FDB44B 0%, #FCAF3B 100%);
+  color: #333;
+  box-shadow: 0 4px 12px rgba(253, 180, 75, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(253, 180, 75, 0.5);
 }
 
 .btn-secondary {
-  background: rgba(244, 67, 54, 0.2);
-  color: #ff6b6b;
-  border: 1px solid rgba(244, 67, 54, 0.3);
+  background: rgba(255, 255, 255, 0.3);
+  color: #333;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-  background: rgba(244, 67, 54, 0.3);
+  background: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
 }
 
 .btn-edit {
-  background: rgba(33, 150, 243, 0.2);
-  color: #64b5f6;
+  background: rgba(255, 255, 255, 0.2);
+  color: #FDB44B;
   padding: 8px 16px;
   font-size: 13px;
-  border: 1px solid rgba(33, 150, 243, 0.3);
+  border: 1px solid rgba(253, 180, 75, 0.3);
   backdrop-filter: blur(10px);
 }
 
 .btn-edit:hover {
-  background: rgba(33, 150, 243, 0.3);
-  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+  background: rgba(253, 180, 75, 0.2);
+  box-shadow: 0 4px 12px rgba(253, 180, 75, 0.3);
 }
 
 .btn-delete {
   background: rgba(244, 67, 54, 0.2);
-  color: #ff6b6b;
+  color: #f44336;
   padding: 8px 16px;
   font-size: 13px;
   border: 1px solid rgba(244, 67, 54, 0.3);
@@ -128,46 +197,48 @@ body::before {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
   padding: 24px;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   transition: all 0.3s ease;
 }
 
 .card:hover {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
 input, select, textarea {
   font-family: inherit;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
-  backdrop-filter: blur(10px);
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  transition: all 0.3s ease;
 }
 
 input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border: 1px solid rgba(102, 126, 234, 0.5);
-  box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+  border: 1px solid #FDB44B;
+  box-shadow: 0 0 12px rgba(253, 180, 75, 0.2);
 }
 
 input.error, select.error {
   border-color: rgba(244, 67, 54, 0.5);
-  background-color: rgba(244, 67, 54, 0.1);
+  background-color: rgba(244, 67, 54, 0.05);
 }
 
 .error-message {
-  color: #ff6b6b;
+  color: #f44336;
   font-size: 12px;
   margin-top: 4px;
   display: block;

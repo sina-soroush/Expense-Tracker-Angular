@@ -1,27 +1,23 @@
-<div class="expense-item">
-  <div class="expense-content">
-    <div class="expense-icon">
-      <lucide-icon [img]="getCategoryIcon(expense.category)" [size]="32"></lucide-icon>
+<div class="expense-card">
+  <div class="card-content">
+    <div class="card-header">
+      <div class="category-icon">
+        <lucide-icon [img]="getCategoryIcon(expense.category)" [size]="24"></lucide-icon>
+      </div>
+      <h3 class="card-title">{{ expense.title }}</h3>
+      <div class="amount">{{ expense.amount | currency }}</div>
     </div>
-    <div class="expense-details">
-      <h3 class="expense-title">{{ expense.title }}</h3>
-      <div class="expense-meta">
-        <span class="expense-category">{{ expense.category }}</span>
-        <span class="expense-date">{{ expense.date | date: 'MMM d, y' }}</span>
+    <div class="card-meta">
+      <span class="category-badge">{{ expense.category }}</span>
+      <span class="date-text">{{ expense.date | date: 'MMM d' }}</span>
+      <div class="action-buttons">
+        <button [routerLink]="['/edit', expense.id]" class="edit-icon-btn" title="Edit expense">
+          <lucide-icon [img]="PencilIcon" [size]="18"></lucide-icon>
+        </button>
+        <button (click)="onDelete()" class="delete-btn" title="Delete expense">
+          <lucide-icon [img]="TrashIcon" [size]="18"></lucide-icon>
+        </button>
       </div>
     </div>
-    <div class="expense-amount">
-      {{ expense.amount | currency }}
-    </div>
-  </div>
-  <div class="expense-actions">
-    <button [routerLink]="['/edit', expense.id]" class="btn btn-edit" title="Edit expense">
-      <lucide-icon [img]="PencilIcon" [size]="14" style="display: inline-block; vertical-align: middle; margin-right: 4px;"></lucide-icon>
-      Edit
-    </button>
-    <button (click)="onDelete()" class="btn btn-delete" title="Delete expense">
-      <lucide-icon [img]="TrashIcon" [size]="14" style="display: inline-block; vertical-align: middle; margin-right: 4px;"></lucide-icon>
-      Delete
-    </button>
   </div>
 </div>

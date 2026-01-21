@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Expense } from '../../models/expense.model';
-import { LucideAngularModule, Utensils, Home, Car, Film, Lightbulb, Activity, ShoppingBag, BookOpen, Package } from 'lucide-angular';
+import { LucideAngularModule, Utensils, Home, Car, Film, Lightbulb, Activity, ShoppingBag, BookOpen, Package, Wallet } from 'lucide-angular';
 
 
 @Component({
@@ -12,6 +12,8 @@ import { LucideAngularModule, Utensils, Home, Car, Film, Lightbulb, Activity, Sh
 })
 export class SummaryComponent implements OnChanges {
   @Input() expenses: Expense[] = [];
+  
+  readonly WalletIcon = Wallet;
   
   totalAmount = 0;
   expenseCount = 0;

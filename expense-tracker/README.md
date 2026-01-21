@@ -87,11 +87,11 @@ expense-tracker/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
-- Angular CLI (`npm install -g @angular/cli`)
+- **Node.js** (v18 or higher) - [Download here](https://nodejs.org/)
+- **npm** (comes with Node.js)
+- No need to install Angular CLI globally - the project uses local dependencies
 
-### Installation
+### Quick Start
 
 1. **Clone the repository**
    ```bash
@@ -105,20 +105,67 @@ expense-tracker/
    ```
 
 3. **Run the development server**
+   
+   **Option 1: Using npm (recommended)**
    ```bash
-   ng serve
+   npm start
+   ```
+
+   **Option 2: If you encounter issues with Conda or other tools intercepting the `ng` command**
+   ```bash
+   node ./node_modules/@angular/cli/bin/ng.js serve
+   ```
+
+   **Option 3: Using npx**
+   ```bash
+   npx ng serve
    ```
 
 4. **Open your browser**
-   Navigate to `http://localhost:4200/`
+   
+   The app will automatically open, or navigate to: **http://localhost:4200/**
+
+   You should see:
+   ```
+   ✓ Application bundle generation complete.
+   ✓ Local:   http://localhost:4200/
+   ```
+
+### Troubleshooting
+
+**Problem:** `ng: command not found` or Conda intercepting the command
+- **Solution:** Use Option 2 or Option 3 from step 3 above
+
+**Problem:** Port 4200 is already in use
+- **Solution:** Run with a different port:
+  ```bash
+  npm start -- --port 4300
+  ```
+
+**Problem:** Node.js version warning
+- **Note:** Odd-numbered Node.js versions (like v25) are for testing. The app works fine, but consider using LTS versions (v18, v20, v22) for production.
 
 ### Building for Production
 
+```bash
+npm run build
+```
+
+Or for production configuration:
 ```bash
 ng build --configuration production
 ```
 
 The build artifacts will be stored in the `dist/` directory.
+
+### Available Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start development server on http://localhost:4200 |
+| `npm run build` | Build the project |
+| `npm run watch` | Build in watch mode for development |
+| `npm test` | Run unit tests |
 
 ## 📱 Application Overview
 
