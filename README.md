@@ -24,9 +24,10 @@ A modern, feature-rich expense tracking application built with Angular, designed
 
 You can view the live version of this project here:
 
-👉 **[Live Demo](https://expense-tracker-angular-sigma.vercel.app/)** _(coming soon)_
+👉 https://sina-soroush.github.io/Expense-Tracker-Angular/expenses
+![1](https://github.com/user-attachments/assets/1c53a91a-a894-4e91-b0ac-6f6fee4cec6d)
+![2](https://github.com/user-attachments/assets/725827c8-840e-49c1-aa94-c6ae8b994367)
 
-![Expense Tracker Screenshot](https://via.placeholder.com/800x400?text=Expense+Tracker+Screenshot)
 
 ## 🛠️ Built With
 
