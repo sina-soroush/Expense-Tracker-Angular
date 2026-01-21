@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +8,8 @@ import { ExpenseService } from '../../services/expense.service';
 import { Expense, EXPENSE_CATEGORIES } from '../../models/expense.model';
 import { ExpenseItemComponent } from '../expense-item/expense-item';
 import { SummaryComponent } from '../summary/summary';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 
 @Component({
   selector: 'app-expense-list',
@@ -15,10 +17,12 @@ import { SummaryComponent } from '../summary/summary';
   templateUrl: './expense-list.html',
   styleUrl: './expense-list.css',
 })
-export class ExpenseListComponent implements OnInit, OnDestroy {
+export class ExpenseListComponent implements OnInit, OnDestroy, AfterViewInit {
   readonly WalletIcon = Wallet;
   readonly PlusIcon = Plus;
   readonly SearchIcon = Search;
+  
+  @ViewChild('dateFilter') dateFilter!: ElementRef<HTMLInputElement>;
   
   expenses: Expense[] = [];
   filteredExpenses: Expense[] = [];
@@ -28,6 +32,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
   searchQuery: string = '';
   
   private subscription?: Subscription;
+  private flatpickrInstance: any = null;
 
   constructor(private expenseService: ExpenseService) {}
 
@@ -40,6 +45,22 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+    if (this.flatpickrInstance) {
+      this.flatpickrInstance.destroy();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.dateFilter?.nativeElement) {
+      this.flatpickrInstance = flatpickr(this.dateFilter.nativeElement, {
+        dateFormat: 'Y-m-d',
+        onChange: (selectedDates, dateStr) => {
+          this.selectedDate = dateStr;
+          this.applyFilters();
+        },
+        disableMobile: true,
+      });
+    }
   }
 
   onSearchChange(): void {

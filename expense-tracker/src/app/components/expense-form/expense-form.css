@@ -81,6 +81,7 @@
   color: #FDB44B;
   font-size: 24px;
   font-weight: 700;
+  line-height: 1;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -88,6 +89,15 @@
   justify-content: center;
   flex-shrink: 0;
   box-shadow: 0 2px 8px rgba(253, 180, 75, 0.15);
+  padding: 0;
+}
+
+.amount-btn span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .amount-btn:hover {
@@ -132,6 +142,187 @@
   font-size: 14px;
   color: #333;
   transition: all 0.3s ease;
+}
+
+/* Title input with enhanced styling */
+input#title {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 180, 75, 0.05) 100%);
+  border: 2px solid rgba(253, 180, 75, 0.2);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(253, 180, 75, 0.1);
+  transition: all 0.3s ease;
+}
+
+input#title:hover {
+  border-color: rgba(253, 180, 75, 0.4);
+  box-shadow: 0 4px 12px rgba(253, 180, 75, 0.2);
+  transform: translateY(-1px);
+}
+
+input#title:focus {
+  outline: none;
+  border-color: #FDB44B;
+  box-shadow: 0 0 16px rgba(253, 180, 75, 0.3), 0 4px 12px rgba(253, 180, 75, 0.2);
+  transform: translateY(-1px);
+}
+
+input#title::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* ng-select custom styling to match app theme */
+::ng-deep .form-group ng-select {
+  width: 100%;
+}
+
+::ng-deep .form-group ng-select .ng-select-container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 180, 75, 0.05) 100%);
+  border: 2px solid rgba(253, 180, 75, 0.2);
+  border-radius: 12px;
+  padding: 4px 12px;
+  min-height: 46px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(253, 180, 75, 0.1);
+  transition: all 0.3s ease;
+}
+
+::ng-deep .form-group ng-select .ng-select-container:hover {
+  border-color: rgba(253, 180, 75, 0.4);
+  box-shadow: 0 4px 12px rgba(253, 180, 75, 0.2);
+  transform: translateY(-1px);
+}
+
+::ng-deep .form-group ng-select.ng-select-focused .ng-select-container {
+  border-color: #FDB44B;
+  box-shadow: 0 0 16px rgba(253, 180, 75, 0.3), 0 4px 12px rgba(253, 180, 75, 0.2);
+  transform: translateY(-1px);
+}
+
+::ng-deep .form-group ng-select .ng-arrow-wrapper {
+  padding-right: 8px;
+}
+
+::ng-deep .form-group ng-select .ng-arrow {
+  border-color: #FDB44B transparent transparent;
+  border-width: 6px 6px 0;
+}
+
+::ng-deep .form-group ng-select.ng-select-opened .ng-arrow {
+  border-color: transparent transparent #FDB44B;
+  border-width: 0 6px 6px;
+}
+
+::ng-deep .form-group ng-select .ng-placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+}
+
+/* Hide category icon when in placeholder state */
+::ng-deep .form-group ng-select .ng-value-container .ng-placeholder .category-icon,
+::ng-deep .form-group ng-select.ng-select-opened .ng-placeholder .category-icon,
+::ng-deep .form-group ng-select .ng-placeholder .category-icon {
+  display: none !important;
+}
+
+::ng-deep .ng-dropdown-panel {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(253, 180, 75, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  margin-top: 4px;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin: 4px 8px;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover {
+  background: rgba(253, 180, 75, 0.1);
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+  background: linear-gradient(135deg, #FDB44B 0%, #FCAF3B 100%);
+  color: white;
+  font-weight: 600;
+}
+
+.category-label,
+.category-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.category-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FDB44B 0%, #FCAF3B 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(253, 180, 75, 0.3);
+}
+
+.category-icon lucide-icon {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Date input with calendar icon - matching main page filter style */
+input#date {
+  padding: 12px 45px 12px 18px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 180, 75, 0.05) 100%);
+  border: 2px solid rgba(253, 180, 75, 0.2);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(253, 180, 75, 0.1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23FDB44B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  background-size: 20px 20px;
+  transition: all 0.3s ease;
+}
+
+input#date:hover {
+  border-color: rgba(253, 180, 75, 0.4);
+  box-shadow: 0 4px 12px rgba(253, 180, 75, 0.2);
+  transform: translateY(-1px);
+}
+
+input#date:focus {
+  outline: none;
+  border-color: #FDB44B;
+  box-shadow: 0 0 16px rgba(253, 180, 75, 0.3), 0 4px 12px rgba(253, 180, 75, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Hide native date picker calendar icon/indicator */
+input#date::-webkit-calendar-picker-indicator {
+  display: none;
+  opacity: 0;
+}
+
+input#date::-webkit-inner-spin-button,
+input#date::-webkit-outer-spin-button {
+  display: none;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .form-group input::placeholder {
@@ -326,4 +517,87 @@
   .form-group select {
     padding: 12px;
   }
+}
+
+/* Flatpickr custom styling */
+.flatpickr-calendar {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  font-family: inherit;
+}
+
+.flatpickr-months {
+  background: linear-gradient(135deg, #FDB44B 0%, #FCAF3B 100%);
+  border-radius: 16px 16px 0 0;
+  padding: 10px;
+}
+
+.flatpickr-current-month {
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  fill: white !important;
+}
+
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+  fill: rgba(255, 255, 255, 0.8) !important;
+}
+
+.flatpickr-weekday {
+  color: #FDB44B;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.flatpickr-day {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: #333;
+  font-weight: 500;
+}
+
+.flatpickr-day:hover:not(.flatpickr-disabled):not(.selected) {
+  background: rgba(253, 180, 75, 0.2);
+  border-color: rgba(253, 180, 75, 0.3);
+  color: #333;
+}
+
+.flatpickr-day.selected {
+  background: linear-gradient(135deg, #FDB44B 0%, #FCAF3B 100%);
+  border-color: #FDB44B;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(253, 180, 75, 0.3);
+}
+
+.flatpickr-day.today {
+  border-color: #FDB44B;
+  background: rgba(253, 180, 75, 0.1);
+  font-weight: 700;
+  color: #FDB44B;
+}
+
+.flatpickr-day.today:hover {
+  border-color: #FDB44B;
+  background: rgba(253, 180, 75, 0.25);
+  color: #FDB44B;
+}
+
+.flatpickr-months .flatpickr-month {
+  background: transparent;
+}
+
+.flatpickr-months .flatpickr-prev-month svg,
+.flatpickr-months .flatpickr-next-month svg {
+  width: 14px;
+  height: 14px;
 }

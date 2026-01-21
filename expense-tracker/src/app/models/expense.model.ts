@@ -6,6 +6,13 @@ export interface Expense {
   date: Date;
 }
 
+export interface CategoryOption {
+  value: string;
+  label: string;
+  icon: any; // Lucide icon
+  color: string;
+}
+
 export const EXPENSE_CATEGORIES = [
   'Food',
   'Rent',

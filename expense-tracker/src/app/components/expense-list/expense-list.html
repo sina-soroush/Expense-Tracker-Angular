@@ -43,11 +43,10 @@
         <div class="filter-group">
           <label>Date</label>
           <input 
-            type="date" 
+            #dateFilter
+            type="text" 
             id="date-filter" 
             [(ngModel)]="selectedDate" 
-            (change)="onDateChange()"
-            [value]="selectedDate"
             class="filter-input"
             placeholder="Select date">
         </div>

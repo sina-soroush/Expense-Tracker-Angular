@@ -59,15 +59,33 @@
     <div class="form-row">
       <div class="form-group form-group-half">
         <label for="category">Category *</label>
-        <select 
-          id="category" 
+        <ng-select
+          id="category"
           formControlName="category"
+          [items]="categoryOptions"
+          bindLabel="label"
+          bindValue="value"
+          placeholder="Select a category"
+          [clearable]="false"
+          [searchable]="false"
           [class.error]="isFieldInvalid('category')">
-          <option value="">Select a category</option>
-          <option *ngFor="let category of categories" [value]="category">
-            {{ category }}
-          </option>
-        </select>
+          <ng-template ng-label-tmp let-item="item">
+            <span class="category-label" *ngIf="item && item.icon">
+              <span class="category-icon">
+                <lucide-icon [img]="item.icon" [size]="18"></lucide-icon>
+              </span>
+              <span>{{item.label}}</span>
+            </span>
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item">
+            <span class="category-option">
+              <span class="category-icon">
+                <lucide-icon [img]="item.icon" [size]="18"></lucide-icon>
+              </span>
+              <span>{{item.label}}</span>
+            </span>
+          </ng-template>
+        </ng-select>
         
         <div class="error-message" *ngIf="hasError('category', 'required')">
           Category is required
@@ -77,9 +95,11 @@
       <div class="form-group form-group-half">
         <label for="date">Date *</label>
         <input 
-          type="date" 
+          #dateInput
+          type="text" 
           id="date" 
           formControlName="date"
+          placeholder="Select date"
           [class.error]="isFieldInvalid('date')">
         
         <div class="error-message" *ngIf="hasError('date', 'required')">
