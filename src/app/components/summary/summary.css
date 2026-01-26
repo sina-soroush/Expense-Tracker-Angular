@@ -216,7 +216,9 @@
   .summary-sidebar {
     padding: 20px 16px;
     border-radius: 16px;
-    margin-bottom: 16px;
+    margin: 0 0 16px 0;
+    max-width: 100%;
+    width: 100%;
   }
 
   .sidebar-header {
@@ -261,6 +263,9 @@
   .summary-sidebar {
     padding: 16px 12px;
     border-radius: 12px;
+    margin: 0 0 16px 0;
+    max-width: 100%;
+    width: 100%;
   }
 
   .sidebar-header h2 {

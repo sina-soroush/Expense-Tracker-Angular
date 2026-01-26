@@ -473,13 +473,16 @@
 @media (max-width: 1200px) {
   .expense-list-container {
     grid-template-columns: 1fr;
-    padding: 20px 15px;
+    padding: 20px 10px;
+    max-width: 100%;
   }
 
   .left-section,
   .center-section,
   .right-section {
     padding-right: 0;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -487,6 +490,7 @@
   .expense-list-container {
     padding: 15px 10px;
     height: auto;
+    max-width: 100%;
   }
 
   .header {
@@ -495,6 +499,9 @@
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
   }
 
   .welcome-section h1 {
@@ -535,6 +542,8 @@
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
+    width: 100%;
+    max-width: 100%;
   }
 
   .filter-select,
@@ -558,6 +567,8 @@
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
+    width: 100%;
+    max-width: 100%;
   }
 
   .empty-message {
@@ -571,12 +582,16 @@
 
 @media (max-width: 480px) {
   .expense-list-container {
-    padding: 10px 8px;
+    padding: 10px;
+    max-width: 100%;
   }
 
   .header {
     padding: 16px 12px;
     border-radius: 12px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
   }
 
   .welcome-section h1 {

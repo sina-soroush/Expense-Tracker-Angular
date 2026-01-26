@@ -272,7 +272,7 @@ input.error, select.error {
 
 @media (max-width: 768px) {
   .container {
-    padding: 10px;
+    padding: 10px 0;
   }
   
   .btn {
