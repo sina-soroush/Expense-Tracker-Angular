@@ -181,6 +181,12 @@
   flex-direction: column;
   gap: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: min-height 0.3s ease;
+}
+
+/* Increase height when dropdown is open */
+.filters:has(.ng-select-opened) {
+  min-height: 420px;
 }
 
 .filters-row {
@@ -475,6 +481,8 @@
     grid-template-columns: 1fr;
     padding: 20px 10px;
     max-width: 100%;
+    height: auto;
+    overflow: visible;
   }
 
   .left-section,
@@ -483,6 +491,8 @@
     padding-right: 0;
     width: 100%;
     max-width: 100%;
+    overflow: visible;
+    height: auto;
   }
 }
 
@@ -546,6 +556,10 @@
     max-width: 100%;
   }
 
+  .filters-row {
+    margin-bottom: 20px;
+  }
+
   .filter-select,
   .filter-input {
     padding: 14px 18px;
@@ -604,6 +618,10 @@
 
   .filters {
     padding: 12px;
+  }
+
+  .filters-row {
+    margin-bottom: 20px;
   }
 }
 
